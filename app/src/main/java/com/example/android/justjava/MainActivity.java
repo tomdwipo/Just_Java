@@ -1,7 +1,7 @@
 package com.example.android.justjava;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
@@ -10,7 +10,7 @@ import java.text.NumberFormat;
 /**
  * This app displays an order form to order coffee.
  */
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
     int quantity = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,10 +25,8 @@ public class MainActivity extends ActionBarActivity {
     public void increment (View view) {
 
         quantity = quantity+1;
-        TextView quantityTextView = (TextView) findViewById(
-                R.id.quantity_text_view);
-        quantityTextView.setText("" + quantity);
-        //displayQuantity(quantity);
+
+        displayQuantity(quantity);
        // displayPrice(quantity * 3);
     }
     /**
@@ -38,10 +36,8 @@ public class MainActivity extends ActionBarActivity {
     public void decrement (View view) {
 
         quantity=quantity-1;
-        TextView quantityTextView = (TextView) findViewById(
-                R.id.quantity_text_view);
-        quantityTextView.setText("" + quantity);
-        //displayQuantity(quantity);
+
+        displayQuantity(quantity);
         //displayPrice(quantity * 3);
     }
     /**
@@ -49,12 +45,25 @@ public class MainActivity extends ActionBarActivity {
      */
 
     public void submitOrder(View view) {
-        int price = quantity*5;
-        String priceMessage = "Total: $"+price+"\nThank You !" ;
+        //int price = quantity*5;
+      createOrderSummary();
+      //  displayPrice(quantity * 5);
+    }
+    private void createOrderSummary(){
+        int price = calculatePrice(quantity);
+        String priceMessage = "Name: Kaptain Kunal"+ "\nQuantity: "+ quantity+"\nTotal: $ "+price+"\nThank You !";
 
         displayMessage(priceMessage);
 
-      //  displayPrice(quantity * 5);
+    }
+    /**
+     * Calculates the price of the order.
+     *
+     * @param quantity is the number of cups of coffee ordered
+     */
+    private int calculatePrice(int quantity) {
+        int price = quantity * 5;
+        return price;
     }
 
     /**
@@ -63,8 +72,10 @@ public class MainActivity extends ActionBarActivity {
     private void displayQuantity(int number) {
         TextView quantityTextView = (TextView) findViewById(
                 R.id.quantity_text_view);
+
         quantityTextView.setText("" + number);
     }
+
 
     /**
      * This method displays the given price on the screen.
