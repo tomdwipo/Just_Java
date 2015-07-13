@@ -3,12 +3,14 @@ package com.example.android.justjava;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 /**
  * This app displays an order form to order coffee.
  */
 public class MainActivity extends AppCompatActivity {
+    private CheckBox check;
     int quantity = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +51,20 @@ public class MainActivity extends AppCompatActivity {
     }
     private void createOrderSummary(){
         int price = calculatePrice(quantity);
-        String priceMessage = "Name: Kaptain Kunal"+ "\nQuantity: "+ quantity+"\nTotal: $ "+price+"\nThank You !";
+        check = (CheckBox)findViewById(R.id.checkbox1);
+        if (check.isChecked()){
+            String priceMessage = "Name: Kaptain Kunal"+"\n add whipped cream? true"+
+                    "\nQuantity: "+ quantity+"\nTotal: $ "+price+"\nThank You !";
 
-        displayMessage(priceMessage);
+            displayMessage(priceMessage);
+        }else{
+            String priceMessage = "Name: Kaptain Kunal"+"\n add whipped cream? false"+
+                    "\nQuantity: "+ quantity+"\nTotal: $ "+price+"\nThank You !";
+
+            displayMessage(priceMessage);
+
+        }
+
 
     }
     /**
