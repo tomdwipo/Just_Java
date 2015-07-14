@@ -4,12 +4,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 
 /**
  * This app displays an order form to order coffee.
  */
 public class MainActivity extends AppCompatActivity {
+    private EditText inputText;
     private CheckBox check1;
     private CheckBox check2;
     int quantity = 0;
@@ -51,20 +53,22 @@ public class MainActivity extends AppCompatActivity {
       //  displayPrice(quantity * 5);
     }
     private void createOrderSummary(){
+        inputText = (EditText)findViewById(R.id.editText);
+        String name1= inputText.getText().toString();
         int price = calculatePrice(quantity);
         check1 = (CheckBox)findViewById(R.id.checkbox1);
         boolean cream1 = check1.isChecked();
         check2 = (CheckBox)findViewById(R.id.checkbox2);
         boolean chocolate1= check2.isChecked();
-        submitOrderSummary(price, cream1,chocolate1);
+        submitOrderSummary(price, cream1,chocolate1, name1);
 
         }
 
 
 
-    private void submitOrderSummary(int price , boolean cream, boolean chocolate){
+    private void submitOrderSummary(int price , boolean cream, boolean chocolate, String name){
 
-        String priceMessage = "Name: Kaptain Kunal";
+        String priceMessage = "Name: "+ name;
         priceMessage += "\nadd whipped cream? " + cream;
         priceMessage += "\nadd Chocolate? " + chocolate;
         priceMessage += "\nQuantity: ";
