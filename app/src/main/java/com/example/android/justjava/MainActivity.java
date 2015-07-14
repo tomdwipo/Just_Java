@@ -10,7 +10,8 @@ import android.widget.TextView;
  * This app displays an order form to order coffee.
  */
 public class MainActivity extends AppCompatActivity {
-    private CheckBox check;
+    private CheckBox check1;
+    private CheckBox check2;
     int quantity = 0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,20 +52,25 @@ public class MainActivity extends AppCompatActivity {
     }
     private void createOrderSummary(){
         int price = calculatePrice(quantity);
-        check = (CheckBox)findViewById(R.id.checkbox1);
-        if (check.isChecked()){
-            String priceMessage = "Name: Kaptain Kunal"+"\n add whipped cream? true"+
-                    "\nQuantity: "+ quantity+"\nTotal: $ "+price+"\nThank You !";
-
-            displayMessage(priceMessage);
-        }else{
-            String priceMessage = "Name: Kaptain Kunal"+"\n add whipped cream? false"+
-                    "\nQuantity: "+ quantity+"\nTotal: $ "+price+"\nThank You !";
-
-            displayMessage(priceMessage);
+        check1 = (CheckBox)findViewById(R.id.checkbox1);
+        boolean cream1 = check1.isChecked();
+        check2 = (CheckBox)findViewById(R.id.checkbox2);
+        boolean chocolate1= check2.isChecked();
+        submitOrderSummary(price, cream1,chocolate1);
 
         }
 
+
+
+    private void submitOrderSummary(int price , boolean cream, boolean chocolate){
+
+        String priceMessage = "Name: Kaptain Kunal";
+        priceMessage += "\nadd whipped cream? " + cream;
+        priceMessage += "\nadd Chocolate? " + chocolate;
+        priceMessage += "\nQuantity: ";
+        priceMessage +=  quantity+"\nTotal: $ "+ price;
+        priceMessage += "\nThank You !";
+        displayMessage(priceMessage);
 
     }
     /**
