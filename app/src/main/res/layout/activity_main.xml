@@ -45,6 +45,7 @@
 
 
 
+
         <TextView
             android:text="Quantity"
             android:id="@+id/quantity"
@@ -86,6 +87,7 @@
             android:layout_height="wrap_content"
             android:text="Order"
             android:onClick="submitOrder"/>
+
 
     </LinearLayout>
 </ScrollView>
