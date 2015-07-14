@@ -55,12 +55,14 @@ public class MainActivity extends AppCompatActivity {
     private void createOrderSummary(){
         inputText = (EditText)findViewById(R.id.editText);
         String name1= inputText.getText().toString();
-        int price = calculatePrice(quantity);
+
         check1 = (CheckBox)findViewById(R.id.checkbox1);
         boolean cream1 = check1.isChecked();
         check2 = (CheckBox)findViewById(R.id.checkbox2);
         boolean chocolate1= check2.isChecked();
+        int price = calculatePrice(cream1,chocolate1);
         submitOrderSummary(price, cream1,chocolate1, name1);
+
 
         }
 
@@ -80,26 +82,17 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Calculates the price of the order.
      *
-     * @param quantity is the number of cups of coffee ordered
+     * @param addChocolate1 is the number of cups of coffee ordered
      */
-    private int calculatePrice(int quantity) {
-        check1 = (CheckBox)findViewById(R.id.checkbox1);
-        check2 = (CheckBox)findViewById(R.id.checkbox2);
-        if (check1.isChecked() && check2.isChecked()){
-            int price = quantity * 5 + 3;
-            return price;
-        }else if (check1.isChecked()){
-            int price = quantity * 5 + 1;
-            return price;
-        }else if (check2.isChecked()){
-            int price = quantity * 5 + 2;
-            return price;
-        }else {
-            int price = quantity * 5;
-            return price;
+    private int calculatePrice(boolean addCream1, boolean addChocolate1) {
+        int basePrice = 5;
+        if (addCream1){
+            basePrice = basePrice+1;
         }
-
-
+        if (addChocolate1){
+            basePrice=basePrice+2;
+        }
+        return quantity * basePrice;
     }
 
     /**
