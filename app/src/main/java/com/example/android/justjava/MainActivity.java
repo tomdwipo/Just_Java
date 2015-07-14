@@ -83,8 +83,23 @@ public class MainActivity extends AppCompatActivity {
      * @param quantity is the number of cups of coffee ordered
      */
     private int calculatePrice(int quantity) {
-        int price = quantity * 5;
-        return price;
+        check1 = (CheckBox)findViewById(R.id.checkbox1);
+        check2 = (CheckBox)findViewById(R.id.checkbox2);
+        if (check1.isChecked() && check2.isChecked()){
+            int price = quantity * 5 + 3;
+            return price;
+        }else if (check1.isChecked()){
+            int price = quantity * 5 + 1;
+            return price;
+        }else if (check2.isChecked()){
+            int price = quantity * 5 + 2;
+            return price;
+        }else {
+            int price = quantity * 5;
+            return price;
+        }
+
+
     }
 
     /**
