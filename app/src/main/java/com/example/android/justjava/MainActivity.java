@@ -1,5 +1,7 @@
 package com.example.android.justjava;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -58,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
     public void submitOrder(View view) {
         //int price = quantity*5;
       createOrderSummary();
+
       //  displayPrice(quantity * 5);
     }
     private void createOrderSummary(){
@@ -69,14 +72,23 @@ public class MainActivity extends AppCompatActivity {
         check2 = (CheckBox)findViewById(R.id.checkbox2);
         boolean chocolate1= check2.isChecked();
         int price = calculatePrice(cream1, chocolate1);
-        submitOrderSummary(price, cream1,chocolate1, name1);
+        String message= submitOrderSummary(price, cream1, chocolate1, name1);
+
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
+        intent.putExtra(Intent.EXTRA_SUBJECT, "JustJava order for " + name1);
+        intent.putExtra(Intent.EXTRA_TEXT, message);
+
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
 
 
         }
 
 
 
-    private void submitOrderSummary(int price , boolean cream, boolean chocolate, String name){
+    private String submitOrderSummary(int price , boolean cream, boolean chocolate, String name){
 
         String priceMessage = "Name: "+ name;
         priceMessage += "\nadd whipped cream? " + cream;
@@ -84,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         priceMessage += "\nQuantity: ";
         priceMessage +=  quantity+"\nTotal: $ "+ price;
         priceMessage += "\nThank You !";
-        displayMessage(priceMessage);
+       return priceMessage;
 
     }
     /**
