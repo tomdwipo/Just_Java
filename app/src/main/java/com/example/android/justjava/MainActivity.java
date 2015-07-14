@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
         priceMessage += "\nadd Chocolate? " + chocolate;
         priceMessage += "\nQuantity: ";
         priceMessage +=  quantity+"\nTotal: $ "+ price;
-        priceMessage += "\nThank You !";
+        priceMessage += "\n" + getString(R.string.thank_you);
        return priceMessage;
 
     }
