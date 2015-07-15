@@ -2,5 +2,8 @@
 <resources>
     <string name="action_settings">setings</string>
     <string name="thank_you">Terimakasih</string>
+    <string name="app_name">Just Java</string>
+
+    <string name="hello_world">Hello world!</string>
 
 </resources>
